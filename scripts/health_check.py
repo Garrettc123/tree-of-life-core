@@ -18,7 +18,7 @@ def check_redis():
         r.ping()
         print("✅ Redis: ONLINE")
         return True
-    except:
+    except Exception:
         print("❌ Redis: OFFLINE")
         return False
 
@@ -32,7 +32,7 @@ def check_context_stream():
         info = r.xinfo_stream('context-stream')
         print(f"✅ Context Stream: {info['length']} events")
         return True
-    except:
+    except Exception:
         print("❌ Context Stream: NOT INITIALIZED")
         return False
 
