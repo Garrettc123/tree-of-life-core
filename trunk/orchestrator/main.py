@@ -76,7 +76,13 @@ class MasterOrchestrator:
     async def handle_verification(self, data):
         """Verification Branch Handler"""
         print("✓ Verification Branch: Analyzing contribution...")
-        contribution_id = data.get('args', {}).get('contributionId')
+        args = data.get('args', {})
+        if isinstance(args, str):
+            try:
+                args = json.loads(args)
+            except (json.JSONDecodeError, TypeError):
+                args = {}
+        contribution_id = args.get('contributionId')
         # TODO: Trigger verification agents
         # For now, publish to verification branch's listener
         self.redis.publish('branch:verification:task', json.dumps({

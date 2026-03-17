@@ -1,0 +1,5 @@
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+# Disable the web3 pytest plugin which has an incompatible eth_typing import
+addopts = "-p no:pytest_ethereum"
